@@ -9,7 +9,7 @@ sns.set()
 
 def draw_spectrogram(spectrogram, dynamic_range=70):
     X, Y = spectrogram.x_grid(), spectrogram.y_grid()
-    print(str(len(X)) + " " + str(len(Y)) + " ")
+    print(spectrogram.y_grid())
     sg_db = 10 * np.log10(spectrogram.values)
     plt.pcolormesh(X, Y, sg_db, vmin=sg_db.max() - dynamic_range, cmap='afmhot')
     plt.ylim([spectrogram.ymin, spectrogram.ymax])
