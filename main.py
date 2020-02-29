@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+#make stuff look nice
 sns.set()
 
 def draw_spectrogram(spectrogram, dynamic_range=70):
