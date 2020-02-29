@@ -1,3 +1,5 @@
+pip install numpy praat-parselmouth matplotlib seaborn
+
 GitHub to this project
 https://github.com/Green-Robot-Dev-Studios/MariHacks2k20
 
