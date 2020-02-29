@@ -9,6 +9,7 @@ sns.set()
 
 def draw_spectrogram(spectrogram, dynamic_range=70):
     X, Y = spectrogram.x_grid(), spectrogram.y_grid()
+    print(X, Y)
     sg_db = 10 * np.log10(spectrogram.values)
     plt.pcolormesh(X, Y, sg_db, vmin=sg_db.max() - dynamic_range, cmap='afmhot')
     plt.ylim([spectrogram.ymin, spectrogram.ymax])
@@ -19,4 +20,4 @@ plt.figure()
 snd = pm.Sound("audio/peak.wav")
 spectrogram = snd.to_spectrogram()
 draw_spectrogram(spectrogram)
-plt.show()
+#plt.show()
