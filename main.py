@@ -12,9 +12,13 @@ def find_pitch(pitch):
   pitch_values = pitch.selected_array['frequency']   
   print(pitch_values)
   gen.set_tempo(0, 100)
+
+  total_time = len(pitch_values)/100
+
   loop = 0
   for x in pitch_values:
     if x == 0:
+      loop = loop + 1
       continue
     gen.add_note(f.freq2midi(x), loop, 1, 50)
     loop = loop + 1
@@ -28,4 +32,4 @@ if __name__ == "__main__":
 
 #g.graph(pitch)
 
-#hello my name is austin i like rubiks cube and anime girls my favourite hentai is euphoria
+#hello my name is austin i like rubiks cube and anime girls my favourite hentai is euphoria  
