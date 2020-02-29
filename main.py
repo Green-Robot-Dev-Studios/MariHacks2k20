@@ -1,16 +1,21 @@
-import parselmouth
+import parselmouth as pm
 
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-sns.set() # Use seaborn's default style to make attractive graphs
+sns.set()
 
-# Plot nice figures using Python's "standard" matplotlib library
-snd = parselmouth.Sound("audio/sing.mp3")
+def draw_spectrogram(spectrogram, dynamic_range=70):
+    X, Y = spectrogram.x_grid(), spectrogram.y_grid()
+    sg_db = 10 * np.log10(spectrogram.values)
+    plt.pcolormesh(X, Y, sg_db, vmin=sg_db.max() - dynamic_range, cmap='afmhot')
+    plt.ylim([spectrogram.ymin, spectrogram.ymax])
+    plt.xlabel("time [s]")
+    plt.ylabel("frequency [Hz]")
+
 plt.figure()
-plt.plot(snd.xs(), snd.values.T)
-plt.xlim([snd.xmin, snd.xmax])
-plt.xlabel("time [s]")
-plt.ylabel("amplitude")
-plt.show() # or plt.savefig("sound.png"), or plt.savefig("sound.pdf")
+snd = pm.Sound("audio/peak.wav")
+spectrogram = snd.to_spectrogram()
+draw_spectrogram(spectrogram)
+plt.show()
