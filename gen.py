@@ -10,5 +10,5 @@ def add_note(notePitch, time, duration, vol):
 
 def write(path):
   with open(path, "wb") as output:
-    midi.write_file(output)
+    midi.writeFile(output)
     
