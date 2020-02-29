@@ -1,6 +1,15 @@
 import parselmouth as pm
-import graphing as g
-import numpy as np
+import graphing as g ## needed for graphing
+import freqtomidi as f
+import numpy as np ## needed for other libs
+import json
+import fluidsynth
+import time
+
+print(f.freq2midi(480))
+
+with open('freq.json', 'r') as f:
+    freq = json.load(f)
 
 def find_pitch(pitch):
   pitch_values = pitch.selected_array['frequency']
