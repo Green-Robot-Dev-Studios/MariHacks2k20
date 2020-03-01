@@ -4,8 +4,6 @@ import gen
 import sample
 import freqtomidi as f
 import numpy as np  ## needed for other libs
-from midi2audio import FluidSynth
-import time
 
 #print(f.midi2freq(f.freq2midi(480)))
 
@@ -30,9 +28,7 @@ def find_pitch(pitch):
       loop = loop + 1
 
       beat = beat + lengths[loop]
-  gen.write("export.mid")
-  fs = FluidSynth()
-  fs.midi_to_audio('exports/export.mid', 'exports/output.wav')
+  gen.write("exports/export.mid")
 
 if __name__ == "__main__":
   snd = pm.Sound("audio/townroad.wav")
