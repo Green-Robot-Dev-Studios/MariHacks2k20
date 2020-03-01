@@ -8,7 +8,10 @@ def set_tempo(time, bpm):
 def add_note(notePitch, time, duration, vol):
   midi.addNote(0, 0, notePitch, time, duration, vol);
 
+def add_bass_note(notePitch, time, duration, vol):
+  midi.addNote(33, 0, notePitch, time, duration, vol);
+
+
 def write(path):
   with open("exports/"+path, "wb") as output:
     midi.writeFile(output)
-    

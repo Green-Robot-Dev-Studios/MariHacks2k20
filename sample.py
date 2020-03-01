@@ -1,3 +1,5 @@
+import freqtomidi as fm
+
 bpm = 100
 
 def create_sample(pitches):
@@ -6,11 +8,17 @@ def create_sample(pitches):
   total_time = len(pitches)/bpm
   #sample 1 note for every (len(pitch_values)/bpm) pitches
 
-  threshold = 10
+  threshold = 11
   duration = 1
   cur = -11
+  prevNote = 0
   for i in range(len(pitches)):
-    if pitches[i] <= cur+threshold and pitches[i] >= cur-threshold:
+    note = fm.freq2midi(pitches[i])
+    if prevNote == 0 or (note < prevNote+0 and note > prevNote-0):
+        prevNote = note
+        duration = duration + 1
+        continue
+    if (pitches[i] <= cur+threshold and pitches[i] >= cur-threshold) or pitches[i] == 0:
       duration = duration + 1
       continue
     else:
@@ -18,6 +26,7 @@ def create_sample(pitches):
       duration = 1
       cur = pitches[i]
       fixed_pitches.append(cur)
+    prevNote = note
 
 
 
