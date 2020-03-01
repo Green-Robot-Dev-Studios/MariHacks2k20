@@ -18,9 +18,7 @@ def find_pitch(pitch):
 
   loop = 0
   for x in pitches:
-    if x == 0:
-      loop = loop + 1
-      continue
+    
     gen.add_note(f.freq2midi(x), loop, lengths[loop], 50)
     loop = loop + 1
   gen.write("export.mid")
