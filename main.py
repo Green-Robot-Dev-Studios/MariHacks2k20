@@ -27,11 +27,8 @@ def find_pitch(pitch):
     if (loop < len(lengths) - 1):
       print("Adding note " + str(f.freq2midi(x)) + " at time " + str(beat) + " for " + str(lengths[loop + 1]))
       if(lengths[loop + 1] > cfgman.cutoff):
-        if(cfgman.triads):
-          if(beat % 5 == 0):
-              gen.add_root_triad(f.freq2midi(x), beat, lengths[loop + 1], 100)
-          else:
-              gen.add_note(f.freq2midi(x), beat, lengths[loop + 1], 100)
+        if(beat % 5 == 0 and cfgman.triads):
+          gen.add_root_triad(f.freq2midi(x), beat, lengths[loop + 1], 100)
         else:
           gen.add_note(f.freq2midi(x), beat, lengths[loop + 1], 100)
         if(cfgman.bass):
