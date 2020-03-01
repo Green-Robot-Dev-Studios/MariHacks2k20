@@ -4,6 +4,9 @@ import gen
 import sample
 import freqtomidi as f
 import numpy as np  ## needed for other libs
+from midi2audio import FluidSynth
+import time
+import sys
 
 #print(f.midi2freq(f.freq2midi(480)))
 
@@ -23,19 +26,20 @@ def find_pitch(pitch):
     if (loop < len(lengths) - 1):
       print("Adding note " + str(f.freq2midi(x)) + " at time " + str(beat) + " for " + str(lengths[loop + 1]))
       if(lengths[loop + 1] > 5):
-        gen.add_note(f.freq2midi(x), beat, lengths[loop + 1], 100)
-        gen.add_note(f.freq2midi(x/2), beat, lengths[loop + 1], 90)
+        if(beat % 5 == 0):
+            gen.add_root_triad(f.freq2midi(x), beat, lengths[loop + 1], 100)
+        else:
+            gen.add_note(f.freq2midi(x), beat, lengths[loop + 1], 100)
+        gen.add_bass_note(f.freq2midi(x/2), beat, lengths[loop + 1], 90)
       loop = loop + 1
 
       beat = beat + lengths[loop]
-  gen.write("exports/export.mid")
+  gen.write("export.mid")
 
 if __name__ == "__main__":
-  snd = pm.Sound("audio/townroad.wav")
+  snd = pm.Sound("audio/" + sys.argv[1] + ".wav")
   pitch = snd.to_pitch()
 
   find_pitch(pitch)
 
 #g.graph(pitch)
-
-#hello my name is austin i like rubiks cube and anime girls my favourite hentai is euphoria
