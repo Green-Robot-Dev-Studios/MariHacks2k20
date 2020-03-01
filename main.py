@@ -7,6 +7,7 @@ import numpy as np  ## needed for other libs
 from midi2audio import FluidSynth
 import time
 import sys
+import cfgman.py
 
 #print(f.midi2freq(f.freq2midi(480)))
 
@@ -25,12 +26,16 @@ def find_pitch(pitch):
   for x in pitches:
     if (loop < len(lengths) - 1):
       print("Adding note " + str(f.freq2midi(x)) + " at time " + str(beat) + " for " + str(lengths[loop + 1]))
-      if(lengths[loop + 1] > 5):
-        if(beat % 5 == 0):
-            gen.add_root_triad(f.freq2midi(x), beat, lengths[loop + 1], 100)
+      if(lengths[loop + 1] > cfgman.cutoff):
+        if(cfgman.triads):
+          if(beat % 5 == 0):
+              gen.add_root_triad(f.freq2midi(x), beat, lengths[loop + 1], 100)
+          else:
+              gen.add_note(f.freq2midi(x), beat, lengths[loop + 1], 100)
         else:
-            gen.add_note(f.freq2midi(x), beat, lengths[loop + 1], 100)
-        gen.add_bass_note(f.freq2midi(x/2), beat, lengths[loop + 1], 90)
+          gen.add_note(f.freq2midi(x), beat, lengths[loop + 1], 100)
+        if(cfgman.bass):
+          gen.add_bass_note(f.freq2midi(x/2), beat, lengths[loop + 1], 90)
       loop = loop + 1
 
       beat = beat + lengths[loop]
@@ -40,6 +45,7 @@ if __name__ == "__main__":
   snd = pm.Sound("audio/" + sys.argv[1] + ".wav")
   pitch = snd.to_pitch()
 
+  cfgman.load_config()
   find_pitch(pitch)
 
 #g.graph(pitch)

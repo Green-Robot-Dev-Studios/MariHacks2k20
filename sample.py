@@ -1,4 +1,5 @@
 import freqtomidi as fm
+import cfgman
 
 bpm = 100
 
@@ -8,7 +9,7 @@ def create_sample(pitches):
   total_time = len(pitches)/bpm
   #sample 1 note for every (len(pitch_values)/bpm) pitches
 
-  threshold = 11
+  threshold = cfgman.threshold
   duration = 1
   cur = -11
   prevNote = 0
