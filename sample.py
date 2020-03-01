@@ -6,7 +6,7 @@ def create_sample(pitches):
   total_time = len(pitches)/bpm
   #sample 1 note for every (len(pitch_values)/bpm) pitches
 
-  threshold = 5
+  threshold = 10
   duration = 1
   cur = -11
   for i in range(len(pitches)):
