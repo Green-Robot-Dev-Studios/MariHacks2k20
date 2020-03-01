@@ -7,7 +7,7 @@ import numpy as np  ## needed for other libs
 from midi2audio import FluidSynth
 import time
 import sys
-import cfgman.py
+import cfgman
 
 #print(f.midi2freq(f.freq2midi(480)))
 
