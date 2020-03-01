@@ -1,6 +1,7 @@
 import parselmouth as pm
 import graphing as g ## needed for graphing
 import gen
+import sample
 import freqtomidi as f
 import numpy as np ## needed for other libs
 import fluidsynth
@@ -13,14 +14,14 @@ def find_pitch(pitch):
   print(pitch_values)
   gen.set_tempo(0, 100)
 
-  total_time = len(pitch_values)/100
+  pitches, lengths = sample.create_sample(pitch_values)
 
   loop = 0
-  for x in pitch_values:
+  for x in pitches:
     if x == 0:
       loop = loop + 1
       continue
-    gen.add_note(f.freq2midi(x), loop, 1, 50)
+    gen.add_note(f.freq2midi(x), loop, lengths[loop], 50)
     loop = loop + 1
   gen.write("export.mid")
 
