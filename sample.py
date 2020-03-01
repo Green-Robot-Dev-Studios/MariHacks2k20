@@ -14,9 +14,9 @@ def create_sample(pitches):
       duration+=1
       continue
     else:
-      fixed_durations += duration
+      fixed_durations.append(duration)
       duration = 0
       cur = i
-      fixed_pitches += i
+      fixed_pitches.append(i)
 
   return fixed_pitches, fixed_durations
