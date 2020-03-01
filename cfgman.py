@@ -8,10 +8,10 @@ def load_config():
     k = l.split()
     if(k[0] == "hasTriads"):
       global triads
-      triads = bool(k[1])
+      triads = int(k[1])
     elif(k[0] == "useBass"):
       global bass
-      bass = bool(k[1])
+      bass = int(k[1])
     elif(k[0] == "threshold"):
       global threshold
       threshold = int(k[1])
