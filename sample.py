@@ -10,7 +10,7 @@ def create_sample(pitches):
   duration = 0
   cur = -11
   for i in range(len(pitches)):
-    if i >= cur-threshold and i <= cur+threshold:
+    if i <= cur-threshold and i >= cur+threshold:
       duration+=1
       continue
     else:
