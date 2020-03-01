@@ -11,14 +11,16 @@ import time
 
 def find_pitch(pitch):
   pitch_values = pitch.selected_array['frequency']   
-  print(pitch_values)
+  #print(pitch_values)
   gen.set_tempo(0, 100)
 
+  print("Before Pitch Values " + pitch_values)
   pitches, lengths = sample.create_sample(pitch_values)
+  print("After Pitch Change " + pitches + lengths)
 
   loop = 0
   for x in pitches:
-    
+    print("Adding note " + f.freq2midi(x) + " at time " + loop + " for " + lengths[loop])
     gen.add_note(f.freq2midi(x), loop, lengths[loop], 50)
     loop = loop + 1
   gen.write("export.mid")

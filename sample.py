@@ -6,17 +6,19 @@ def create_sample(pitches):
   total_time = len(pitches)/bpm
   #sample 1 note for every (len(pitch_values)/bpm) pitches
   
-  threshold = 10
-  duration = 0
+  threshold = 5
+  duration = 1
   cur = -11
   for i in range(len(pitches)):
-    if i <= cur-threshold and i >= cur+threshold:
-      duration+=1
+    if pitches[i] <= cur-threshold and pitches[i] >= cur+threshold:
+      duration = duration + 1
       continue
     else:
       fixed_durations.append(duration)
-      duration = 0
-      cur = i
-      fixed_pitches.append(i)
+      duration = 1
+      cur = pitches[i]
+      fixed_pitches.append(cur)
+  
+  
 
   return fixed_pitches, fixed_durations
